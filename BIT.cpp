@@ -1,7 +1,7 @@
 template<class T>
 class BIT {
     public:
-    vector<T> bit;  // binary indexed tree
+    vector<T> bit; 
     int n;
     BIT(int n) {
         n += 5;
