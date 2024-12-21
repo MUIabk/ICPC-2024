@@ -40,7 +40,6 @@ vd conv(const vd& a, const vd& b) {
 	return res;
 }
 const int M = mod;
- 
 vll convMod(const vll &a, const vll &b) {
 	if (a.empty() || b.empty()) return {};
 	vll res(a.size() + b.size() - 1);
@@ -62,7 +61,6 @@ vll convMod(const vll &a, const vll &b) {
 	}
 	return res;
 }
-
 vll binpow(vll b,ll p){
     vll ans=vll(1,1);
     for(;p;p>>=1){
@@ -71,3 +69,4 @@ vll binpow(vll b,ll p){
     }
     return ans;
 }
+//exponentiation can be done, by resizing the inital array after 5n, and doing fft transformation, then exponentiating the values of points and then inverse fft
