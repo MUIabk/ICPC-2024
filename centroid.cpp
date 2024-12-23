@@ -3,12 +3,10 @@ int subtree[N], parentcentroid[N];
 set<int> g[N];
 void dfs(int u, int par)
 {
-	nodes++;
-	subtree[u] = 1;
+	nodes++, subtree[u] = 1;
 	for(auto &it:g[u])
 	{
-		if(it == par)
-			continue;
+		if(it == par) continue;
 		dfs(it, u);
 		subtree[u] += subtree[it];
 	}
@@ -17,12 +15,10 @@ int centroid(int u, int par)//this par will be assigned to the centroid
 {
 	for(auto &it:g[u])
 	{
-		if(it == par)
-			continue;
+		if(it == par)continue;
 		if(subtree[it] > (nodes >> 1))
 			return centroid(it,u);
-	}
-	return u;
+	} return u;
 }
 void decompose(int u, int par)
 {
