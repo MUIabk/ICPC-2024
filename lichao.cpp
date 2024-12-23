@@ -1,7 +1,7 @@
  
 struct Line {
-  ll m, b;
-  ll operator()(ll x) { return m * x + b; }
+  ll m, c;
+  ll operator()(ll x) { return m * x + c; }
 };
 struct Node {
   Line seg;
@@ -38,7 +38,7 @@ void del(Node* o) {
   delete o;
 }
 void merge(Node* dest, Node* o) {
-  if(o->seg.m != 0 || o->seg.b != inf) insert(-C, C, o->seg, dest);
+  if(o->seg.m != 0 || o->seg.c != inf) insert(-N, N, o->seg, dest);
   if(o->lson) merge(dest, o->lson);
   if(o->rson) merge(dest, o->rson);
 }
