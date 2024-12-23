@@ -1,9 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
-#define lld long double
+#define ld long double
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((int)(x).size())
+const int N = 1e5 + 10;
 void solve() {
 }
 int32_t main() {
@@ -12,7 +13,7 @@ int32_t main() {
     cout.tie(0);
     int t = 1;
     cin >> t;
-    for(int tc = 0; tc < t; tc ++) {
+    for(int tc = 1; tc <= t; tc ++) {
         solve();
     }
 }
