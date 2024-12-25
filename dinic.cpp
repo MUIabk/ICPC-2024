@@ -40,5 +40,3 @@ struct Dinic {
 	}
 	bool leftOfMinCut(int a) { return lvl[a] != 0; }
 };
-
-//Eg:https://codeforces.com/contest/1765/submission/241215381
