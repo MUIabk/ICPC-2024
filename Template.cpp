@@ -2,6 +2,8 @@
 using namespace std;
 #define ll long long
 #define ld long double
+#define rep(i, a, b) for(int i = a; i < b; i ++)
+#define REP(i, b, a) for(int i = b - 1; i >= a; i --)
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((int)(x).size())
 const int N = 1e5 + 10;
