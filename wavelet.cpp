@@ -1,5 +1,5 @@
 int a[N];
-struct wavelet_tree{    // O(nlogA) space, O(logA) time, 
+struct wavelet_tree{    // O(nlogA) space, O(logA) time, 1-based
 	#define vi vector<int>
 	#define pb push_back
 	int lo, hi;   // use compression for logA -> logn
