@@ -30,7 +30,4 @@ struct Basis {
   		return res;
   	}
 };
-
 using T = Basis<int, 20>;
-
-// link: https://codeforces.com/gym/493310/submission/237680600
