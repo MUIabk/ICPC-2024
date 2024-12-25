@@ -72,6 +72,16 @@ struct SGT {
         ans.merge(l, r);
         return ans;
     }
+    template <typename F>
+    int get_first(int tl, int tr, int i, int ql, int qr, F &check) {
+        if(tl > qr or tr < ql) return -1;
+        if(!check(tree[i].val)) return -1;
+        if(tl == tr) return tl;
+        int mid = (tl + tr) / 2;
+        int left = get_first(tl, mid, i << 1, ql, qr, f);
+        if(~ left) return left;
+        return get_first(mid + 1, tr, i << 1 | 1, ql, qr, f);
+    }
     void update(int ql, int qr, ll val) {
         Update new_update = Update(val); 
         update(0, n - 1, 1, ql, qr, new_update);
@@ -96,7 +106,7 @@ struct Node {
         val = p1; 
     }
     void merge(Node &l, Node &r) { 
-        val = l.val + r.val;
+        val = max(l.val, r.val);
     }
 };
 struct Update {
