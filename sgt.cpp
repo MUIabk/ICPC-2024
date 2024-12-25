@@ -99,9 +99,7 @@ struct SGT {
 };
 struct Node {
     ll val; 
-    Node() { 
-        val = 0;    
-    }
+    Node() : Node(0) {}
     Node(ll p1) {
         val = p1; 
     }
@@ -111,9 +109,7 @@ struct Node {
 };
 struct Update {
     ll val; 
-    Update(){ 
-        val = 0;
-    }
+    Update() : Update(0) {}
     Update(ll _val) { 
         val = _val;
     }
