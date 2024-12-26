@@ -1,4 +1,6 @@
 struct Dinic {
+        using ll = long long;
+        using vi = vector<int>;
 	struct Edge {
 		int to, rev;
 		ll c, oc;
