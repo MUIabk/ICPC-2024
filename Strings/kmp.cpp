@@ -7,16 +7,13 @@ vector<int> kmp(const string& s) {
 	}
 	return p;
 }
-
 vector<int> match(const string& s, const string& pat) {
 	vector<int> p = kmp(pat + '\0' + s), res;
 	for(int i = sz(p) - sz(s); i < sz(p); i ++) 
 		if (p[i] == sz(pat)) res.push_back(i - 2 * sz(pat));
 	return res;
 }
-
 vector<vector<int>>aut;
-
 void compute_automaton(string s){
     s += '#';
     vector<int> pi = kmp(s);

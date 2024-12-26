@@ -16,14 +16,6 @@ struct TwoSat {
 	void imply(int f, int j) {
 		either(~f, j);
 	}
-	void xor1(int a, int b){  
-		either(a, b);
-		either(~a, ~b);
-	}
-	void xor0(int a, int b){  
-		either(a, ~b);
-		either(~a, b);
-	}
 	void either(int f, int j) {
 		addEdge(f, ~j);
 		addEdge(j, ~f);

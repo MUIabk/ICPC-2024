@@ -18,9 +18,6 @@ class BIT {
             ret += bit[r];
         return ret;
     }
-    T sum(int l, int r) {
-        return sum(r) - sum(l - 1);
-    }
     void add(int idx, T delta) {
         for (; idx < n; idx = (idx | (idx + 1)))
             bit[idx] += delta;

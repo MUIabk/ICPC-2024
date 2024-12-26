@@ -3,8 +3,7 @@ struct StringHash {
     using ll = long long;
     static inline array<ll, 2> Q = {271, 277};
     static inline array<ll, 2> M = {1000000007, 998244353};
-    vector<array<ll, K>> ps;
-    vector<array<ll, K>> pw;
+    vector<array<ll, K>> ps, pw;
     void init(string s) {
         int n = s.length();
         ps.resize(n + 1);

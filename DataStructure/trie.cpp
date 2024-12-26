@@ -49,20 +49,4 @@ struct Trie {
         }
         return trie[cur].end;
     }
-    int max_xor(vector<int> &word) {
-        if(!sz) return -1;
-        int cur = 0;
-        int ans = 0;
-        int p = 1 << (int)word.size() - 1;
-        for(auto &x : word) {
-            if(~trie[cur].nxt[x ^ 1] and trie[trie[cur].nxt[x ^ 1]].cnt) {
-                cur = trie[cur].nxt[x ^ 1];
-                ans |= p;
-            }else {
-                cur = trie[cur].nxt[x];
-            }
-            p >>= 1;
-        }
-        return ans;
-    }
 };

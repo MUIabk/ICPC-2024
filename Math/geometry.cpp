@@ -1,9 +1,7 @@
-template<class T>
-struct Point {
+template<class T> struct Point {
     T x;
     T y;
     Point(T x_ = 0, T y_ = 0) : x(x_), y(y_) {}
-    
     template<class U>
     operator Point<U>() {
         return Point<U>(U(x), U(y));
@@ -49,12 +47,6 @@ struct Point {
     friend bool operator==(Point a, Point b) {
         return a.x == b.x && a.y == b.y;
     }
-    friend std::istream &operator>>(std::istream &is, Point &p) {
-        return is >> p.x >> p.y;
-    }
-    friend std::ostream &operator<<(std::ostream &os, Point p) {
-        return os << "(" << p.x << ", " << p.y << ")";
-    }
 };
 template<class T>
 T dot(Point<T> a, Point<T> b) {
@@ -70,10 +62,10 @@ T square(Point<T> p) {
 }
 template<class T>
 double length(Point<T> p) {
-    return std::sqrt(double(square(p)));
+    return sqrt(double(square(p)));
 }
 long double length(Point<long double> p) {
-    return std::sqrt(square(p));
+    return sqrt(square(p));
 }
 template<class T>
 Point<T> normalize(Point<T> p) {
@@ -103,11 +95,11 @@ Point<T> lineIntersection(Line<T> l1, Line<T> l2) {
 }
 template<class T>
 bool pointOnSegment(Point<T> p, Line<T> l) {
-    return cross(p - l.a, l.b - l.a) == 0 && std::min(l.a.x, l.b.x) <= p.x && p.x <= std::max(l.a.x, l.b.x)
-        && std::min(l.a.y, l.b.y) <= p.y && p.y <= std::max(l.a.y, l.b.y);
+    return cross(p - l.a, l.b - l.a) == 0 && min(l.a.x, l.b.x) <= p.x && p.x <= max(l.a.x, l.b.x)
+        && min(l.a.y, l.b.y) <= p.y && p.y <= max(l.a.y, l.b.y);
 }
 template<class T>
-bool pointInPolygon(Point<T> a, std::vector<Point<T>> p) {
+bool pointInPolygon(Point<T> a, vector<Point<T>> p) {
     int n = p.size();
     for (int i = 0; i < n; i++) {
         if (pointOnSegment(a, Line(p[i], p[(i + 1) % n]))) {
@@ -125,43 +117,38 @@ bool pointInPolygon(Point<T> a, std::vector<Point<T>> p) {
             t ^= 1;
         }
     }
-    
     return t == 1;
 }
-// 0 : not intersect
-// 1 : strictly intersect
-// 2 : overlap
-// 3 : intersect at endpoint
 template<class T>
-std::tuple<int, Point<T>, Point<T>> segmentIntersection(Line<T> l1, Line<T> l2) {
-    if (std::max(l1.a.x, l1.b.x) < std::min(l2.a.x, l2.b.x)) {
+tuple<int, Point<T>, Point<T>> segmentIntersection(Line<T> l1, Line<T> l2) {
+    if (max(l1.a.x, l1.b.x) < min(l2.a.x, l2.b.x)) {
         return {0, Point<T>(), Point<T>()};
-    }
-    if (std::min(l1.a.x, l1.b.x) > std::max(l2.a.x, l2.b.x)) {
+    } // 0 : not intersect
+    if (min(l1.a.x, l1.b.x) > max(l2.a.x, l2.b.x)) {
         return {0, Point<T>(), Point<T>()};
-    }
-    if (std::max(l1.a.y, l1.b.y) < std::min(l2.a.y, l2.b.y)) {
+    } // 1 : strictly intersect
+    if (max(l1.a.y, l1.b.y) < min(l2.a.y, l2.b.y)) {
         return {0, Point<T>(), Point<T>()};
-    }
-    if (std::min(l1.a.y, l1.b.y) > std::max(l2.a.y, l2.b.y)) {
+    } // 2 : overlap
+    if (min(l1.a.y, l1.b.y) > max(l2.a.y, l2.b.y)) {
         return {0, Point<T>(), Point<T>()};
-    }
+    }// 3 : intersect at endpoint
     if (cross(l1.b - l1.a, l2.b - l2.a) == 0) {
         if (cross(l1.b - l1.a, l2.a - l1.a) != 0) {
             return {0, Point<T>(), Point<T>()};
         } else {
-            auto maxx1 = std::max(l1.a.x, l1.b.x);
-            auto minx1 = std::min(l1.a.x, l1.b.x);
-            auto maxy1 = std::max(l1.a.y, l1.b.y);
-            auto miny1 = std::min(l1.a.y, l1.b.y);
-            auto maxx2 = std::max(l2.a.x, l2.b.x);
-            auto minx2 = std::min(l2.a.x, l2.b.x);
-            auto maxy2 = std::max(l2.a.y, l2.b.y);
-            auto miny2 = std::min(l2.a.y, l2.b.y);
-            Point<T> p1(std::max(minx1, minx2), std::max(miny1, miny2));
-            Point<T> p2(std::min(maxx1, maxx2), std::min(maxy1, maxy2));
+            auto maxx1 = max(l1.a.x, l1.b.x);
+            auto minx1 = min(l1.a.x, l1.b.x);
+            auto maxy1 = max(l1.a.y, l1.b.y);
+            auto miny1 = min(l1.a.y, l1.b.y);
+            auto maxx2 = max(l2.a.x, l2.b.x);
+            auto minx2 = min(l2.a.x, l2.b.x);
+            auto maxy2 = max(l2.a.y, l2.b.y);
+            auto miny2 = min(l2.a.y, l2.b.y);
+            Point<T> p1(max(minx1, minx2), max(miny1, miny2));
+            Point<T> p2(min(maxx1, maxx2), min(maxy1, maxy2));
             if (!pointOnSegment(p1, l1)) {
-                std::swap(p1.y, p2.y);
+                swap(p1.y, p2.y);
             }
             if (p1 == p2) {
                 return {3, p1, p2};
@@ -185,7 +172,7 @@ std::tuple<int, Point<T>, Point<T>> segmentIntersection(Line<T> l1, Line<T> l2) 
     }
 }
 template<class T>
-bool segmentInPolygon(Line<T> l, std::vector<Point<T>> p) {
+bool segmentInPolygon(Line<T> l, vector<Point<T>> p) {
     int n = p.size();
     if (!pointInPolygon(l.a, p)) {
         return false;
@@ -259,55 +246,5 @@ bool segmentInPolygon(Line<T> l, std::vector<Point<T>> p) {
     }
     return true;
 }
-template<class T>
-std::vector<Point<T>> hp(std::vector<Line<T>> lines) {
-    std::sort(lines.begin(), lines.end(), [&](auto l1, auto l2) {
-        auto d1 = l1.b - l1.a;
-        auto d2 = l2.b - l2.a;
-        
-        if (sgn(d1) != sgn(d2)) {
-            return sgn(d1) == 1;
-        }
-        
-        return cross(d1, d2) > 0;
-    });
-    std::deque<Line<T>> ls;
-    std::deque<Point<T>> ps;
-    for (auto l : lines) {
-        if (ls.empty()) {
-            ls.push_back(l);
-            continue;
-        }
-        while (!ps.empty() && !pointOnLineLeft(ps.back(), l)) {
-            ps.pop_back();
-            ls.pop_back();
-        }
-        while (!ps.empty() && !pointOnLineLeft(ps[0], l)) {
-            ps.pop_front();
-            ls.pop_front();
-        }
-        if (cross(l.b - l.a, ls.back().b - ls.back().a) == 0) {
-            if (dot(l.b - l.a, ls.back().b - ls.back().a) > 0) {
-                
-                if (!pointOnLineLeft(ls.back().a, l)) {
-                    assert(ls.size() == 1);
-                    ls[0] = l;
-                }
-                continue;
-            }
-            return {};
-        }
-        ps.push_back(lineIntersection(ls.back(), l));
-        ls.push_back(l);
-    }
-    while (!ps.empty() && !pointOnLineLeft(ps.back(), ls[0])) {
-        ps.pop_back();
-        ls.pop_back();
-    }
-    if (ls.size() <= 2) {
-        return {};
-    }
-    ps.push_back(lineIntersection(ls[0], ls.back()));
-    return std::vector(ps.begin(), ps.end());
-}
+
 using P = Point<long long>;

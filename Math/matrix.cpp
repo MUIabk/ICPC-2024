@@ -1,8 +1,5 @@
-template<class T> 
-struct Mat {
-    //x * mat -> [from][to]
-    //mat * x -> [to][from]
-    int n, m;
+template<class T> struct Mat {
+    int n, m; 
     vector<vector<T>> a;
     vector<Mat> mat;   
     Mat() : Mat(0){}
@@ -11,7 +8,7 @@ struct Mat {
     Mat(vector<vector<T>> x) : n(x.size()), m(x[0].size()), a(x){}
     inline const vector<T> &operator[](int k) const {
         return a[k];
-    }
+    } //x * mat -> [from][to] | mat * x -> [to][from]
     inline vector<T> &operator[](int k) {
         return a[k];
     }
@@ -92,8 +89,6 @@ struct Mat {
         return ret;
     }
     void id() {
-        for(int i = 0; i < n; i ++) {
-            a[i][i] = T(1);
-        }
+        for (int i = 0 ; i < n ; i ++) a[i][i] = T(1);
     }
 };

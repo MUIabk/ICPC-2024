@@ -8,16 +8,10 @@ struct wavelet{
             this->rc = rc;
         }
     };
-    int mn = inf, mx = 0;
-    int n;
-    vector<int> p;
+    int mn = inf, mx = 0, n;
+    vector<int> p, a;
     vector<Info> wt;
-    vector<int> a;
-    //its 0-based
-    //space upper bound : n * log (mxe(a))
-    //query : log(mxe(a))
-    //build : n * log (mxe(a))
-    //to reduce log(mxe(a)) to log(n) perform coordinate compression 
+    // to reduce log(mxe(a)) to log(n) perform coordinate compression 
     wavelet(vector<int>&a){
         n = sz(a);
         for(auto &x : a){
@@ -63,8 +57,7 @@ struct wavelet{
         int lp = p[wt[i].st + l - 1], rp = p[wt[i].st + r];
         return less_equals(wt[i].lc, lp, rp - 1, val, lo, m) + less_equals(wt[i].rc, l - lp, r - rp , val, m + 1, hi);
     }
-    // 1 - based
-    int kth(int i, int l, int r, int val, int lo, int hi){
+    int kth(int i, int l, int r, int val, int lo, int hi){    // 1 - based
         if(lo == hi)return lo;
         int m = hi + lo >> 1;
         int lp = p[wt[i].st + l - 1], rp = p[wt[i].st + r];

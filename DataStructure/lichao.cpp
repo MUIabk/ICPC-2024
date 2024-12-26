@@ -1,4 +1,3 @@
- 
 struct Line {
   ll m, c;
   ll operator()(ll x) { return m * x + c; }

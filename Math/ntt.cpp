@@ -1,4 +1,3 @@
-#define vll vector<ll> 
 const ll mod = 998244353;
 namespace getPrimitive{
     ll powmod (ll a, ll b, ll p) {
@@ -10,7 +9,6 @@ namespace getPrimitive{
                 a = ll (a * 1ll * a % p),  b >>= 1;
         return res;
     }
-    // to generate primitive root 
     ll generator (ll p) {
         vector<ll> fact;
         ll phi = p-1,  n = phi;
@@ -22,7 +20,6 @@ namespace getPrimitive{
             }
         if (n > 1)
             fact.push_back (n);
-
         for (ll res=2; res<=p; ++res) {
             bool ok = true;
             for (size_t i=0; i<fact.size() && ok; ++i)
@@ -96,18 +93,5 @@ namespace NTT {
         ntt(a, true);
         return a;
     }
-    //if polynomial exponentiation needed, instead resize the size of polynomial to atleast 5n , then exponentiate the coefficients and then inverse transform
 };
-vll binpow(vll b,ll p){
-    vll ans=vll(1,1);
-    while(p > 0){
-        if(p&1){
-            ans = NTT::multiply(ans,b);
-        }
-        cout << b.size() << endl;
-        b = NTT::multiply(b,b);
-        cout << b.size() << " " <<  count(all(b) , 0) << endl;
-        p = p >> 1;
-    }
-    return ans;
-}
+// NTT::multiply(a, b)
