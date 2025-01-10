@@ -74,6 +74,7 @@ struct SGT {
     }
     template <typename F>
     int get_first(int tl, int tr, int i, int ql, int qr, F &check) {
+        push(i, tl, tr);
         if(tl > qr or tr < ql) return -1;
         if(!check(tree[i].val)) return -1;
         if(tl == tr) return tl;
