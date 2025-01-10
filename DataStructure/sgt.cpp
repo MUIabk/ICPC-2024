@@ -78,9 +78,9 @@ struct SGT {
         if(!check(tree[i].val)) return -1;
         if(tl == tr) return tl;
         int mid = (tl + tr) / 2;
-        int left = get_first(tl, mid, i << 1, ql, qr, f);
+        int left = get_first(tl, mid, i << 1, ql, qr, check);
         if(~ left) return left;
-        return get_first(mid + 1, tr, i << 1 | 1, ql, qr, f);
+        return get_first(mid + 1, tr, i << 1 | 1, ql, qr, check);
     }
     void update(int ql, int qr, ll val) {
         Update new_update = Update(val); 
