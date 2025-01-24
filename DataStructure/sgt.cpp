@@ -76,7 +76,7 @@ struct SGT {
     int get_first(int tl, int tr, int i, int ql, int qr, F &check) {
         push(i, tl, tr);
         if(tl > qr or tr < ql) return -1;
-        if(!check(tree[i].val)) return -1;
+        if(!check(tree[i])) return -1;
         if(tl == tr) return tl;
         int mid = (tl + tr) / 2;
         int left = get_first(tl, mid, i << 1, ql, qr, check);
